@@ -18,9 +18,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell do |shell|
      shell.inline = "puppet module install puppetlabs-stdlib;
                      puppet module install puppetlabs-apt;
-         	     puppet module install richardc-datacat;
-		     provisionuppet module install deric-zookeeper;
-		     puppet module install puppetlabs-java;
+                     puppet module install richardc-datacat;
+                     puppet module install deric-zookeeper;
+                     puppet module install puppetlabs-java;
                      puppet module install puppet-kafka;
                      puppet module install boundary-boundary;
                      exit 0"

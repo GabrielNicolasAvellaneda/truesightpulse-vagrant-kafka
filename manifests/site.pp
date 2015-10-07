@@ -18,23 +18,23 @@ node /ubuntu/ {
 
   # Install Zookeeper at 127.0.0.1
   class { 'zookeeper':
-  	client_ip => $::ipaddress_lo,
-   	require => Exec['update-apt-packages'],
-	  before => Class['kafka']
+    client_ip => $::ipaddress_lo,
+    require => Exec['update-apt-packages'],
+    before => Class['kafka']
   }
 
   # Configure a Kafka Broker
   class {'kafka':
-  	version => $::kafka_version,
-  	scala_version => $::scala_version,
+    version => $::kafka_version,
+    scala_version => $::scala_version,
     install_dir => "/opt/kafka-bin",
-  	require => Class['zookeeper'],
-  	before => Class['kafka::broker']
+    require => Class['zookeeper'],
+    before => Class['kafka::broker']
   }
 
   class {'kafka::broker':
-  	config => { 'broker.id' => '0', 'zookeeper.connect' => 'localhost:2181' },
-  	require => Class['kafka']
+    config => { 'broker.id' => '0', 'zookeeper.connect' => 'localhost:2181' },
+    require => Class['kafka']
   }
 
   class { 'boundary':
@@ -63,6 +63,10 @@ node /^centos-7-0/ {
 
   # Install Zookeeper at 127.0.0.1
   class { 'zookeeper':
+    repo => 'cloudera',
+    packages => ['zookeeper', 'zookeeper-server'],
+    service_name => 'zookeeper-server',
+    initialize_datastore => true,
     client_ip => $::ipaddress_lo,
     require => Exec['update-rpm-packages'],
     before => Class['kafka']
@@ -97,13 +101,12 @@ node /^centos/ {
     command => '/usr/bin/yum update -y',
   }
 
-  package {'epel-release':
-    ensure => 'installed',
-    require => Exec['update-rpm-packages'],
-  }
-
   # Install Zookeeper at 127.0.0.1
   class { 'zookeeper':
+    repo => 'cloudera',
+    packages => ['zookeeper', 'zookeeper-server'],
+    service_name => 'zookeeper-server',
+    initialize_datastore => true,
     client_ip => $::ipaddress_lo,
     require => Exec['update-rpm-packages'],
     before => Class['kafka']
