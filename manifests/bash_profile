@@ -10,3 +10,4 @@ set -o vi
 
 # Export JMX Port for Kafka monitoring
 export JMX_PORT=9990
+

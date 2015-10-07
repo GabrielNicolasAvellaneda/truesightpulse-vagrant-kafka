@@ -54,6 +54,7 @@ node /^centos-7-0/ {
 
   exec { 'update-rpm-packages':
     command => '/usr/bin/yum update -y',
+    timeout => 1800
   }
 
   package {'epel-release':
@@ -99,6 +100,7 @@ node /^centos/ {
 
   exec { 'update-rpm-packages':
     command => '/usr/bin/yum update -y',
+    timeout => 1800
   }
 
   # Install Zookeeper at 127.0.0.1
