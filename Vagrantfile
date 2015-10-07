@@ -18,8 +18,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell do |shell|
      shell.inline = "puppet module install puppetlabs-stdlib;
                      puppet module install puppetlabs-apt;
-		     puppet module install richardc-datacat;
-		     puppet module install deric-zookeeper;
+         	     puppet module install richardc-datacat;
+		     provisionuppet module install deric-zookeeper;
 		     puppet module install puppetlabs-java;
                      puppet module install puppet-kafka;
                      puppet module install boundary-boundary;
@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifest_file  = "site.pp"
     puppet.facter = {
       "boundary_api_token" => ENV["BOUNDARY_API_TOKEN"],
-      "kafka_version" => ENV["KAFKA_VERSION"] ||= "0.8.2.0"
+      "kafka_version" => ENV["KAFKA_VERSION"] ||= "0.8.2.0",
       "scala_version" => ENV["SCALA_VERSION"] || "2.10"
     }
   end
@@ -63,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifest_file  = "site.pp"
       puppet.facter = {
         "boundary_api_token" => ENV["BOUNDARY_API_TOKEN"],
-        "kafka_version" => ENV["KAFKA_VERSION"] ||= "0.8.2.0"
+        "kafka_version" => ENV["KAFKA_VERSION"] ||= "0.8.2.0",
         "scala_version" => ENV["SCALA_VERSION"] || "2.10"
       }
     end
@@ -83,7 +83,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifest_file  = "site.pp"
       puppet.facter = {
         "boundary_api_token" => ENV["BOUNDARY_API_TOKEN"],
-        "kafka_version" => ENV["KAFKA_VERSION"] ||= "0.8.2.0"
+        "kafka_version" => ENV["KAFKA_VERSION"] ||= "0.8.2.0",
         "scala_version" => ENV["SCALA_VERSION"] || "2.10"
       }
     end
